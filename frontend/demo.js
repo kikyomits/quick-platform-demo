@@ -63,6 +63,7 @@ $(document).ready(function() {
     console.log("Call to " + API_ENDPOINT);
     $.ajax({
       url: `http://${API_ENDPOINT}/api/v1/color`,
+      headers: { 'Content-Type': 'application/json' },
       success: function(result) {
         console.log(result);
         var obj = JSON.parse(result);

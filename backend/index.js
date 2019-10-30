@@ -20,13 +20,13 @@ app.use(function(req, res, next) {
 
 app.get("/api/v1/color", function(req, res) {
   res.json({
-    color: "green"
+    "color": "green"
   });
 });
 
 app.get("/health", function(req, res) {
   res.json({
-    health: "ok"
+    "health": "ok"
   });
 });
 
