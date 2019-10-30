@@ -24,6 +24,7 @@ pipeline {
             steps {
                 checkout scm
                 script {
+                    println("### Build Start")
                     errorMessage = "None"
                     
                     try {
@@ -53,6 +54,7 @@ pipeline {
 
             steps {
                 script {
+                    println("### Deploy Start")
                     // Store stage name to send to Slack
                     jobStage = "${STAGE_NAME}"
 
@@ -60,7 +62,7 @@ pipeline {
                     try {
                         openshift.withCluster('sandbox') {
                             openshift.withProject( env.PJ_NAME ) {
-                                openshift.apply(readFile('openshift/deploy.yml'))
+                                openshift.apply(readFile('openshift/deploy.yaml'))
                                 def rollout = openshift.selector('deploymentConfig/${env.APP_NAME}').rollout()
                                 rollout.latest()
                                 rollout.status()
