@@ -4,7 +4,27 @@ items:
   - apiVersion: v1
     kind: Service
     metadata:
-      name: demo
+      name: demo-backend
+      namespace: demo
+      labels:
+        app: demo
+        project: demo
+    spec:
+      type: ClusterIP
+      ports:
+        - name: http2-backend
+          port: 3000
+          protocol: TCP
+          targetPort: 3000
+      selector:
+        app: demo-backend
+        deploymentconfig: demo-backend
+
+
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: demo-frontend
       namespace: demo
       labels:
         app: demo
@@ -16,13 +36,9 @@ items:
           port: 8080
           protocol: TCP
           targetPort: 8080
-        - name: http2-backend
-          port: 3000
-          protocol: TCP
-          targetPort: 3000
       selector:
-        app: demo
-        deploymentconfig: demo
+        app: demo-frontend
+        deploymentconfig: demo-frontend
 
   - apiVersion: v1
     kind: Route
@@ -30,7 +46,7 @@ items:
       name: demo-backend
       namespace: demo
       labels:
-        app: demo
+        app: demo-backend
         project: demo
       annotations:
         haproxy.router.openshift.io/timeout: 180s
@@ -41,7 +57,7 @@ items:
         targetPort: http2-backend
       to:
         kind: Service
-        name: demo
+        name: demo-backend
         weight: 100
       wildcardPolicy: None
 
@@ -51,7 +67,7 @@ items:
       name: demo-frontend
       namespace: demo
       labels:
-        app: demo
+        app: demo-frontend
         project: demo
       annotations:
         haproxy.router.openshift.io/timeout: 180s
@@ -62,6 +78,6 @@ items:
         targetPort: http2-frontend
       to:
         kind: Service
-        name: demo
+        name: demo-frontend
         weight: 100
       wildcardPolicy: None
