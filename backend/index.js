@@ -11,7 +11,7 @@ var port = process.env.PORT || 3000; // port番号を指定
 
 app.get("/api/v1/color", function(req, res) {
   res.json({
-    color: "red"
+    color: "green"
   });
 });
 

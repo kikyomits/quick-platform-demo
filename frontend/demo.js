@@ -59,7 +59,7 @@ $(document).ready(function() {
         "<h3>Please refresh your browser to reconnect </h3>"
       );
     }
-    var API_ENDPOINT = "demo.demo.svc.cluster.local:3000";
+    var API_ENDPOINT = "demo-backend.apps.sandbox.jpn-pe.com";
     console.log("Call to " + API_ENDPOINT);
     $.ajax({
       url: `http://${API_ENDPOINT}/api/v1/color`,
