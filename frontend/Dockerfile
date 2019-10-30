@@ -9,8 +9,12 @@ ADD . $APP_HOME/
 WORKDIR $APP_HOME
 
 # Configure Permissions
-RUN chown -R ${APP_USER}:root $APP_HOME /var/cache/nginx /etc/nginx && \
-    chmod -R ug+rwx $APP_HOME /var/cache/nginx /etc/nginx
+RUN \
+    rm -f /etc/nginx/conf.d/default.conf && \
+    mv default.conf /etc/nginx/conf.d/ && \
+    apk add curl && \
+    chown -R ${APP_USER}:root $APP_HOME /var/cache/nginx /etc/nginx /var/run && \
+    chmod -R ug+rwx $APP_HOME /var/cache/nginx /etc/nginx /var/run 
 
 USER ${APP_USER}
 

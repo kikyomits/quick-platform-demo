@@ -59,10 +59,10 @@ $(document).ready(function() {
         "<h3>Please refresh your browser to reconnect </h3>"
       );
     }
-    var API_ENDPOINT = process.env.API_ENDPOINT;
+    var API_ENDPOINT = "demo.demo.svc.cluster.local:3000";
     console.log("Call to " + API_ENDPOINT);
     $.ajax({
-      url: `${API_ENDPOINT}/api/v1/color`,
+      url: `http://${API_ENDPOINT}/api/v1/color`,
       success: function(result) {
         console.log(result);
         var obj = JSON.parse(result);
