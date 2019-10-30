@@ -67,11 +67,17 @@ $(document).ready(function() {
       success: function(result) {
         console.log(result);
         var obj = JSON.parse(result);
-        $(".apicolor").html(obj.color);
-        $(".apicolor").css("color", obj.color);
-        $("#pod1 .last-success").html(formattedTime());
-        pod1LastSuccessTime = new Date().getTime();
-        podUp(1);
+        if (obj.color == "red") {
+          podDown(1);
+          $(".apicolor").html("???");
+          $(".apicolor").css("color", "red");
+        } else {
+          $(".apicolor").html(obj.color);
+          $(".apicolor").css("color", obj.color);
+          $("#pod1 .last-success").html(formattedTime());
+          pod1LastSuccessTime = new Date().getTime();
+          podUp(1);
+        }
       },
       error: function(xhr, ajaxOptions, thrownError) {
         console.log(xhr);
