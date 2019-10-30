@@ -9,8 +9,8 @@ WORKDIR $APP_HOME
 USER root
 
 RUN yarn install && \
-    chown -R ${APP_USER}:root $APP_HOME /var/cache/nginx /etc/nginx && \
-    chmod -R ug+rwx $APP_HOME /var/cache/nginx /etc/nginx
+    chown -R ${APP_USER}:root $APP_HOME && \
+    chmod -R ug+rwx $APP_HOME
 
 USER ${APP_USER}
 
