@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
 });
 
 app.get("/api/v1/color", function(req, res) {
-  res.json("{\"color\": \"green\"}");
+  res.json("{\"color\": \"red\"}");
 });
 
 app.get("/health", function(req, res) {
