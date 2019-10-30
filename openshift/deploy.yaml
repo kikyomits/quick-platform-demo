@@ -5,21 +5,21 @@ items:
   - apiVersion: v1
     kind: DeploymentConfig
     metadata:
-      name: demo
+      name: demo-backend
       labels:
-        app: demo
+        app: demo-backend
         project: demo
     spec:
       replicas: 1
       selector:
-        app: demo
+        app: demo-backend
         project: demo
       strategy:
         type: Rolling
       template:
         metadata:
           labels:
-            app: demo
+            app: demo-backend
             project: demo
         spec:
           containers:
@@ -28,11 +28,6 @@ items:
               ports:
                 - name: http2-backend
                   containerPort: 3000
-            - name: frontend
-              imagePullPolicy: Always
-              ports:
-                - name: http2-frontend
-                  containerPort: 8080
               env:
                 - name: TZ
                   value: "Asia/Tokyo"
@@ -48,6 +43,39 @@ items:
               name: 'demo-backend:latest'
               namespace: demo
           type: ImageChange
+
+  - apiVersion: v1
+    kind: DeploymentConfig
+    metadata:
+      name: demo-frontend
+      labels:
+        app: demo-frontend
+        project: demo
+    spec:
+      replicas: 1
+      selector:
+        app: demo-frontend
+        project: demo
+      strategy:
+        type: Rolling
+      template:
+        metadata:
+          labels:
+            app: demo-frontend
+            project: demo
+        spec:
+          containers:
+            - name: frontend
+              imagePullPolicy: Always
+              ports:
+                - name: http2-frontend
+                  containerPort: 8080
+              env:
+                - name: TZ
+                  value: "Asia/Tokyo"
+          dnsPolicy: ClusterFirst
+          restartPolicy: Always
+      triggers:
         - imageChangeParams:
             automatic: false
             containerNames:

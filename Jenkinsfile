@@ -64,7 +64,7 @@ pipeline {
                         openshift.withCluster('sandbox') {
                             openshift.withProject( env.PJ_NAME ) {
                                 openshift.apply(readFile('openshift/deploy.yaml'))
-                                def rollout = openshift.selector('deploymentConfig/demo').rollout()
+                                def rollout = openshift.selector('deploymentConfig/${env.APP_NAME}').rollout()
                                 rollout.latest()
                                 rollout.status()
                             }
