@@ -40,6 +40,7 @@ pipeline {
                     } catch(error) {
                         currentBuild.result = "FAILURE"
                         errorMessage =  error.toString()
+                        println(errorMessage)
                     }
                 }
             }
@@ -63,7 +64,7 @@ pipeline {
                         openshift.withCluster('sandbox') {
                             openshift.withProject( env.PJ_NAME ) {
                                 openshift.apply(readFile('openshift/deploy.yaml'))
-                                def rollout = openshift.selector('deploymentConfig/${env.APP_NAME}').rollout()
+                                def rollout = openshift.selector('deploymentConfig/demo').rollout()
                                 rollout.latest()
                                 rollout.status()
                             }
@@ -71,6 +72,7 @@ pipeline {
                     } catch(error) {
                         currentBuild.result = "FAILURE"
                         errorMessage =  error.toString()
+                        println(errorMessage)
                     }                            
                 }
             }
