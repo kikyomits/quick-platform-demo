@@ -5,7 +5,6 @@ items:
     kind: Service
     metadata:
       name: demo-backend
-      namespace: demo
       labels:
         app: demo
         project: demo
@@ -25,7 +24,6 @@ items:
     kind: Service
     metadata:
       name: demo-frontend
-      namespace: demo
       labels:
         app: demo
         project: demo
@@ -44,7 +42,6 @@ items:
     kind: Route
     metadata:
       name: demo-backend
-      namespace: demo
       labels:
         app: demo-backend
         project: demo
@@ -65,7 +62,6 @@ items:
     kind: Route
     metadata:
       name: demo-frontend
-      namespace: demo
       labels:
         app: demo-frontend
         project: demo

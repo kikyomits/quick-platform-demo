@@ -6,7 +6,7 @@ items:
     kind: ImageStream
     metadata: 
       name: demo-backend
-      namespace: demo
+
       labels:
         app: demo-backend
         project: demo
@@ -15,7 +15,7 @@ items:
     kind: BuildConfig
     metadata:
       name: demo-backend
-      namespace: demo
+
       labels:
         app: demo-backend
         project: demo
@@ -43,7 +43,7 @@ items:
     kind: ImageStream
     metadata: 
       name: demo-frontend
-      namespace: demo
+
       labels:
         app: demo-frontend
         project: demo
@@ -52,7 +52,7 @@ items:
     kind: BuildConfig
     metadata:
       name: demo-frontend
-      namespace: demo
+
       labels:
         app: demo-frontend
         project: demo
@@ -62,7 +62,10 @@ items:
         dockerStrategy:
           dockerfilePath: Dockerfile
       source: 
-        type: Binary
+        git: 
+          uri: "https://github.com/mk811/quick-platform-demo.git"
+          ref: "master"
+        contextDir: frontend
       output:
         to:
           kind: ImageStreamTag
